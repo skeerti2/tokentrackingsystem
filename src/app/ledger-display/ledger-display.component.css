@@ -1,0 +1,7 @@
+.ledger-table{
+    margin-top: 10px;
+}
+
+.table-hover tbody tr:hover td{
+    background-color: coral;
+  }

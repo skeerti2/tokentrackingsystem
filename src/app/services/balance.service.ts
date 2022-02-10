@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TransactionClass } from 'src/model/transaction-class.model';
+import { TransactionClass } from '../model/transaction-class.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,20 @@ export class BalanceService {
       this.balance = this.balance + this.valuePerToken*tokenCount;
    }
 
+   isInValidTransaction(tokenCount: number){
+    if(this.balance - tokenCount*this.valuePerToken < 0){
+      return true
+    }
+    return false
+  }
+
+  getTokenValue(){
+    return this.valuePerToken;
+  }
+
    decrementBalance(tokenCount: number){
-     if(this.balance - tokenCount*this.valuePerToken <= 0){
-       return -1
-      }else{
        this.balance = this.balance - tokenCount*this.valuePerToken;
        return this.balance;
-     }
    }
 
    addToTransactions(transactionItem: TransactionClass){
@@ -33,5 +40,9 @@ export class BalanceService {
 
    getBalance(){
      return this.balance;
+   }
+
+   getTransactionList(){
+     return this.transactionsArray;
    }
 }
