@@ -3,19 +3,24 @@
     <table class="table table-hover table-dark">
         <thead class="thead-dark">
             <tr>
-                <!-- <th>Transaction ID</th> -->
                 <th scope="col">Description</th>
+                <th scope="col">Tokens</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Transaction Date</th>
+                <th scope="col">Game</th>
+                <th scope="col">Transaction Type</th>
 
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let transactionItem of getTransactionHistory()">
                 <!-- <th>{{ transactionItem.id }}</th> -->
-                <td>{{ transactionItem.getDescription() }}</td>
-                <td>{{ transactionItem.getNoOfTokens() * getTokenAmount()}}</td>
-                <td>{{ transactionItem.getTransactionDate() | date: "short" }}</td>
+                <td>{{ transactionItem.description }}</td>
+                <td>{{ transactionItem.noOfTokens }}</td>
+                <td>{{ transactionItem.noOfTokens * getTokenAmount()}}</td>
+                <td>{{ transactionItem.transactionDate | date: "short" }}</td>
+                <td>{{ transactionItem.game.name === undefined ? 'N/A': transactionItem.game?.name }}</td>
+                <td>{{ transactionItem.transactionType == transactionTypeEnum.BUY ? 'BOUGHT TOKENS': 'SPENT TOKENS'}}</td>
 
             </tr>
         </tbody>

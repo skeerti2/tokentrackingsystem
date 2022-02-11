@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TOKEN_VALUE } from '../constants/constants';
-import { TransactionClass } from '../model/transaction-class.model';
+import { TransactionType } from '../constants/transaction-type';
+
+import { Transaction } from '../model/transaction.model';
 import { BalanceService } from '../services/balance.service';
 
 @Component({
@@ -9,7 +11,8 @@ import { BalanceService } from '../services/balance.service';
   styleUrls: ['./ledger-display.component.css']
 })
 export class LedgerDisplayComponent implements OnInit {
-  private transactionsArray: TransactionClass[]
+  private transactionsArray: Transaction[]
+  transactionTypeEnum = TransactionType;
   constructor(private _balanceService: BalanceService) {
     this.transactionsArray = []
    }
