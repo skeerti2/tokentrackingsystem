@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TransactionClass} from '../model/transaction-class.model';
 import {BalanceService} from '../services/balance.service';
 import {TransactionType} from '../constants/transaction-type'
+import { Game } from '../model/game.model';
 
 @Component({
   selector: 'app-token-transaction-form',
@@ -10,6 +11,8 @@ import {TransactionType} from '../constants/transaction-type'
 })
 export class TokenTransactionFormComponent implements OnInit {
   transactionType = TransactionType;
+  model = new TransactionClass("Enter description", 0, TransactionType.BUY, {} as Game)
+  games = [new Game("Sonic Adventure Game",5), new Game("Pac man",7), new Game("Space Invaders",7)];
   constructor(private _balanceService: BalanceService) {
   }
 
@@ -17,16 +20,13 @@ export class TokenTransactionFormComponent implements OnInit {
   }
 
   submit(formItems: any){
-    let transaction = new TransactionClass(formItems.value.description, formItems.value.noOfTokens, formItems.value.tokenTransactionType)
-    console.log(typeof Number(formItems.value.tokenTransactionType))
-    console.log(typeof this.transactionType.BUY)
     if(formItems.value.tokenTransactionType == this.transactionType.BUY){
+      let transaction = new TransactionClass(this.model.description, this.model.noOfTokens, this.model.transactionType, {} as Game)
         this._balanceService.addToTransactions(transaction)
-      }else if(formItems.value.tokenTransactionType == this.transactionType.SPEND && !this._balanceService.isInValidTransaction(transaction.getNoOfTokens())){
+      }else if(formItems.value.tokenTransactionType == this.transactionType.SPEND && !this._balanceService.isInValidTransaction(this.model.game.tokens)){
+        let transaction = new TransactionClass(this.model.game.name, this.model.game?.tokens, this.model.transactionType, this.model.game)
         this._balanceService.addToTransactions(transaction)
       }
-      console.log(this._balanceService.getTransactionList())
-      console.log(this._balanceService.getBalance())
 
     }
 

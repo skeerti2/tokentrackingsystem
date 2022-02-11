@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TransactionClass } from '../model/transaction-class.model';
 import {TOKEN_VALUE} from '../constants/constants'
 import { TransactionType } from '../constants/transaction-type';
+import { Game } from '../model/game.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class BalanceService {
    }
 
    private computeBalance(transactionItem: TransactionClass){
+     console.log(transactionItem)
      if(this.transactionsArray.length === 0){
        this.balance = 0;
      }
