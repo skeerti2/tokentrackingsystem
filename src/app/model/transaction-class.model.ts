@@ -1,11 +1,15 @@
+import { TransactionType } from "../constants/transaction-type";
+
 export class TransactionClass {
     private description: string;
     private noOfTokens: number;
     private transactionDate: number;
-    constructor(description: string, noOfTokens: number){
+    private transactionType: TransactionType;
+    constructor(description: string, noOfTokens: number, transactionType: TransactionType){
         this.description = description;
         this.noOfTokens = noOfTokens;
         this.transactionDate = Date.now();
+        this.transactionType = transactionType;
     }
 
     getDescription(){
@@ -18,5 +22,9 @@ export class TransactionClass {
 
     getTransactionDate(){
         return this.transactionDate;
+    }
+
+    getTransactionType(){
+        return this.transactionType;
     }
 }

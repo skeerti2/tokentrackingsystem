@@ -1,42 +1,47 @@
 import { Injectable } from '@angular/core';
 import { TransactionClass } from '../model/transaction-class.model';
+import {TOKEN_VALUE} from '../constants/constants'
+import { TransactionType } from '../constants/transaction-type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BalanceService {
   private balance: number;
-  private valuePerToken: number;
   private transactionsArray: TransactionClass[];
+  transactionType = TransactionType
   constructor() {
     this.balance = 0;
-    this.valuePerToken= 0.25;
     this.transactionsArray = [];
    }
 
-   incrementBalance(tokenCount: number){
-      this.balance = this.balance + this.valuePerToken*tokenCount;
-   }
-
    isInValidTransaction(tokenCount: number){
-    if(this.balance - tokenCount*this.valuePerToken < 0){
+    if(this.balance - tokenCount*TOKEN_VALUE < 0){
       return true
     }
     return false
   }
 
   getTokenValue(){
-    return this.valuePerToken;
+    return TOKEN_VALUE;
   }
-
-   decrementBalance(tokenCount: number){
-       this.balance = this.balance - tokenCount*this.valuePerToken;
-       return this.balance;
-   }
 
    addToTransactions(transactionItem: TransactionClass){
      this.transactionsArray.push(transactionItem)
+     this.computeBalance(transactionItem)
    }
+
+   private computeBalance(transactionItem: TransactionClass){
+     if(this.transactionsArray.length === 0){
+       this.balance = 0;
+     }
+      if(transactionItem.getTransactionType() == this.transactionType.BUY){
+          this.balance = this.balance + transactionItem.getNoOfTokens()*TOKEN_VALUE;
+        }else{
+          this.balance = this.balance - transactionItem.getNoOfTokens()*TOKEN_VALUE;
+        }
+     }
+
 
    getBalance(){
      return this.balance;

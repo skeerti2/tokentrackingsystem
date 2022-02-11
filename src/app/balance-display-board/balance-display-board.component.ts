@@ -17,7 +17,7 @@ export class BalanceDisplayBoardComponent implements OnInit {
   }
 
   getBalance(){
-    return this.balance;
+    return this._balanceService.getBalance();
   }
 
 }
