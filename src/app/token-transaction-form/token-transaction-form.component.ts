@@ -11,7 +11,7 @@ import { Game } from '../model/game.model';
 })
 export class TokenTransactionFormComponent implements OnInit {
   transactionType = TransactionType;
-  model = new TransactionClass("Enter description", 0, TransactionType.BUY, {} as Game)
+  model = new TransactionClass("Description", 1, TransactionType.BUY, {} as Game)
   games = [new Game("Sonic Adventure Game",5), new Game("Pac man",7), new Game("Space Invaders",7)];
   constructor(private _balanceService: BalanceService) {
   }
@@ -20,6 +20,7 @@ export class TokenTransactionFormComponent implements OnInit {
   }
 
   submit(formItems: any){
+    console.log(formItems)
     if(formItems.value.tokenTransactionType == this.transactionType.BUY){
       let transaction = new TransactionClass(this.model.description, this.model.noOfTokens, this.model.transactionType, {} as Game)
         this._balanceService.addToTransactions(transaction)

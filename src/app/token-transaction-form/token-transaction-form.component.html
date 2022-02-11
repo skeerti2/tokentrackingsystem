@@ -1,21 +1,17 @@
 <div class="container form">
-    <!-- <h1>Balance: {{getBalance()}}</h1> -->
-<!-- forms handled in template (.html) are called template driven forms. Suitable for short forms. -->
-<!-- reactive forms are used for large forms -->
-    <!-- use a template variable to bind ... ?? -->
-    <!-- Directive: directives modify the behaviour of html DOM elements/components -->
 <form #addTokenform="ngForm" (ngSubmit) ="submit(addTokenform)">
+    <!-- <div *ngIf="!tokenTransactionType.touched"class="alert alert-danger">Select Buy or Spend</div> -->
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" [(ngModel)]= "model.transactionType" name="tokenTransactionType" id="buyTokens" value={{transactionType.BUY}} >
+        <input required class="form-check-input" #tokenTransactionType="ngModel" type="radio" [(ngModel)]= "model.transactionType" name="tokenTransactionType" id="buyTokens" value={{transactionType.BUY}}>
         <label class="form-check-label" for="buyTokens">Buy Tokens</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="tokenTransactionType" [(ngModel)]= "model.transactionType" id="spendTokens" value={{transactionType.SPEND}}>
+        <input required class="form-check-input" #tokenTransactionType="ngModel" type="radio" name="tokenTransactionType" [(ngModel)]= "model.transactionType" id="spendTokens" value={{transactionType.SPEND}}>
         <label class="form-check-label" for="spendTokens">Spend Tokens</label>
       </div>
       <div [hidden] ="model.transactionType == transactionType.BUY" form-group>
         <label for="exampleFormControlSelect1">Select Game to Buy</label>
-        <select [(ngModel)]="model.game" name="game" class="form-control" id="exampleFormControlSelect1">
+        <select required [(ngModel)]="model.game" name="game" class="form-control" id="exampleFormControlSelect1">
             <option *ngFor="let game of games" [ngValue]="game">
                 {{game.name}}, Tokens: {{game.tokens}}
             </option>
@@ -23,14 +19,15 @@
       </div>
     <div [hidden]= "model.transactionType == transactionType.SPEND" class="form-group">
       <label for="description">Description</label>
-      <input required [(ngModel)]="model.description" name="description" type="text" class="form-control" id="addTokenDescription" aria-describedby="addTokenDescription">
-      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-        <!-- ngModel is used to bind input fields to the form -->
+      <input required [(ngModel)]="model.description" #description ="ngModel" minlength="3" name="description" type="text" class="form-control" id="addTokenDescription" aria-describedby="addTokenDescription">
+        <!--<div *ngIf="description.errors['required']" class="alert alert-danger">Enter valid description</div>-->
+        <div *ngIf="description.touched && description.errors" class="alert alert-danger">Name is required</div>
     </div>
     <div [hidden]= "model.transactionType == transactionType.SPEND" class="form-group">
       <label for="tokenCount">Number of Tokens</label>
-      <input required [(ngModel)]="model.noOfTokens" name="noOfTokens" type="number" class="form-control" id="tokenCount">
+      <input required [(ngModel)]="model.noOfTokens" name="noOfTokens" #noOfTokens="ngModel" type="number" class="form-control" id="tokenCount" min="1" pattern="^[1-9][0-9]*$">
+      <div *ngIf="noOfTokens.errors" class="alert alert-danger">Number of tokens must be greater than 1</div>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button [disabled]="addTokenform.invalid || !tokenTransactionType.touched" type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>

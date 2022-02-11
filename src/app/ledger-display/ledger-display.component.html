@@ -5,6 +5,7 @@
             <tr>
                 <!-- <th>Transaction ID</th> -->
                 <th scope="col">Description</th>
+                <th scope="col">Tokens</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Transaction Date</th>
                 <th scope="col">Game (For Tokens Spent)</th>
@@ -15,9 +16,10 @@
             <tr *ngFor="let transactionItem of getTransactionHistory()">
                 <!-- <th>{{ transactionItem.id }}</th> -->
                 <td>{{ transactionItem.getDescription() }}</td>
+                <td>{{ transactionItem.getNoOfTokens() }}</td>
                 <td>{{ transactionItem.getNoOfTokens() * getTokenAmount()}}</td>
                 <td>{{ transactionItem.getTransactionDate() | date: "short" }}</td>
-                <td>{{ transactionItem.getGame() === undefined ? 'N/A': transactionItem.getGame()?.name }}</td>
+                <td>{{ transactionItem.getGame().name === undefined ? 'N/A': transactionItem.getGame()?.name }}</td>
             </tr>
         </tbody>
     </table>
