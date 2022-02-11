@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TransactionClass} from '../model/transaction-class.model';
 import {BalanceService} from '../services/balance.service';
+import {TransactionType} from '../constants/transaction-type'
 
 @Component({
   selector: 'app-token-transaction-form',
@@ -8,6 +9,7 @@ import {BalanceService} from '../services/balance.service';
   styleUrls: ['./token-transaction-form.component.css']
 })
 export class TokenTransactionFormComponent implements OnInit {
+  transactionType = TransactionType;
   constructor(private _balanceService: BalanceService) {
   }
 
@@ -15,16 +17,16 @@ export class TokenTransactionFormComponent implements OnInit {
   }
 
   submit(formItems: any){
-    let transaction = new TransactionClass(formItems.value.description, formItems.value.noOfTokens)
-      if(formItems.value.tokenTransactionType === "buy"){
+    let transaction = new TransactionClass(formItems.value.description, formItems.value.noOfTokens, formItems.value.tokenTransactionType)
+    console.log(typeof Number(formItems.value.tokenTransactionType))
+    console.log(typeof this.transactionType.BUY)
+    if(formItems.value.tokenTransactionType == this.transactionType.BUY){
         this._balanceService.addToTransactions(transaction)
-        this._balanceService.incrementBalance(transaction.getNoOfTokens())
-      }else if(formItems.value.tokenTransactionType === "spend" && !this._balanceService.isInValidTransaction(transaction.getNoOfTokens())){
+      }else if(formItems.value.tokenTransactionType == this.transactionType.SPEND && !this._balanceService.isInValidTransaction(transaction.getNoOfTokens())){
         this._balanceService.addToTransactions(transaction)
-        this._balanceService.decrementBalance(transaction.getNoOfTokens())
       }
-      console.log(this._balanceService.getBalance())
       console.log(this._balanceService.getTransactionList())
+      console.log(this._balanceService.getBalance())
 
     }
 

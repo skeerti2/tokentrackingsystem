@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TOKEN_VALUE } from '../constants/constants';
 import { TransactionClass } from '../model/transaction-class.model';
 import { BalanceService } from '../services/balance.service';
 
@@ -14,7 +15,7 @@ export class LedgerDisplayComponent implements OnInit {
    }
 
   getTokenAmount(){
-    return this._balanceService.getTokenValue()
+    return TOKEN_VALUE;
   }
 
   ngOnInit(): void {
