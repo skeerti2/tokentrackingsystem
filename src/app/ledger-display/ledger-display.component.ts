@@ -15,9 +15,9 @@ export class LedgerDisplayComponent implements OnInit {
   transactionTypeEnum = TransactionType;
   constructor(private _balanceService: BalanceService) {
     this.transactionsArray = []
-   }
+  }
 
-  getTokenAmount(){
+  getTokenAmount() {
     return TOKEN_VALUE;
   }
 
@@ -25,7 +25,7 @@ export class LedgerDisplayComponent implements OnInit {
     this.transactionsArray = this._balanceService.getTransactionList();
   }
 
-  getTransactionHistory(){
+  getTransactionHistory() {
     return this.transactionsArray;
   }
 

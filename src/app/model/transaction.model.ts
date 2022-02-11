@@ -1,5 +1,5 @@
 import { TransactionType } from "../constants/transaction-type";
-import {Game} from './game.model';
+import { Game } from './game.model';
 
 export class Transaction {
     private _description: string;
@@ -7,7 +7,7 @@ export class Transaction {
     private _transactionDate: number;
     private _transactionType: TransactionType;
     private _game: Game;
-    constructor(description: string, noOfTokens: number, transactionType: TransactionType, game: Game){
+    constructor(description: string, noOfTokens: number, transactionType: TransactionType, game: Game) {
         this._description = description;
         this._noOfTokens = noOfTokens;
         this._transactionDate = Date.now();
@@ -15,43 +15,43 @@ export class Transaction {
         this._game = game;
     }
 
-    get description(){
+    get description() {
         return this._description;
     }
 
-    get noOfTokens(){
+    get noOfTokens() {
         return this._noOfTokens;
     }
 
-    get transactionDate(){
+    get transactionDate() {
         return this._transactionDate;
     }
 
-    get transactionType(){
+    get transactionType() {
         return this._transactionType;
     }
 
-    get game(){
+    get game() {
         return this._game
     }
 
-    set description(description: string){
-     this._description = description;
+    set description(description: string) {
+        this._description = description;
     }
 
-    set noOfTokens(noOfTokens: number){
-     this._noOfTokens = noOfTokens;
+    set noOfTokens(noOfTokens: number) {
+        this._noOfTokens = noOfTokens;
     }
 
-    set transactionDate(transactionDate: number){
+    set transactionDate(transactionDate: number) {
         this._transactionDate = transactionDate;
     }
 
-    set transactionType(transactionType: TransactionType){
-     this._transactionType = transactionType;
+    set transactionType(transactionType: TransactionType) {
+        this._transactionType = transactionType;
     }
 
-    set game(game: Game){
+    set game(game: Game) {
         this._game = game;
     }
 }
