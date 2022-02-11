@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TransactionClass } from '../model/transaction-class.model';
+import { Transaction } from '../model/transaction.model';
 import {TOKEN_VALUE} from '../constants/constants'
 import { TransactionType } from '../constants/transaction-type';
 import { Game } from '../model/game.model';
@@ -9,7 +9,7 @@ import { Game } from '../model/game.model';
 })
 export class BalanceService {
   private balance: number;
-  private transactionsArray: TransactionClass[];
+  private transactionsArray: Transaction[];
   transactionType = TransactionType
   constructor() {
     this.balance = 0;
@@ -27,20 +27,20 @@ export class BalanceService {
     return TOKEN_VALUE;
   }
 
-   addToTransactions(transactionItem: TransactionClass){
+   addToTransactions(transactionItem: Transaction){
      this.transactionsArray.push(transactionItem)
      this.computeBalance(transactionItem)
    }
 
-   private computeBalance(transactionItem: TransactionClass){
+   private computeBalance(transactionItem: Transaction){
      console.log(transactionItem)
      if(this.transactionsArray.length === 0){
        this.balance = 0;
      }
-      if(transactionItem.getTransactionType() == this.transactionType.BUY){
-          this.balance = this.balance + transactionItem.getNoOfTokens();
+      if(transactionItem.transactionType == this.transactionType.BUY){
+          this.balance = this.balance + transactionItem.noOfTokens;
         }else{
-          this.balance = this.balance - transactionItem.getNoOfTokens();
+          this.balance = this.balance - transactionItem.noOfTokens;
         }
      }
 
