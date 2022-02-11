@@ -10,13 +10,13 @@ export class BalanceDisplayBoardComponent implements OnInit {
   private balance: number;
   constructor(private _balanceService: BalanceService) {
     this.balance = this._balanceService.getBalance()
-   }
-
-  ngOnInit(): void {
-    
   }
 
-  getBalance(){
+  ngOnInit(): void {
+
+  }
+
+  getBalance() {
     return this._balanceService.getBalance();
   }
 

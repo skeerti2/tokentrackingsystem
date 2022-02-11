@@ -1,24 +1,24 @@
-export class Game{
-    private _name:string;
+export class Game {
+    private _name: string;
     private _tokens: number;
-    constructor(name: string, tokens: number){
+    constructor(name: string, tokens: number) {
         this._name = name;
         this._tokens = tokens;
     }
 
-    get name(){
+    get name() {
         return this._name;
     }
 
-    get tokens(){
+    get tokens() {
         return this._tokens;
     }
 
-    set name(name: string){
+    set name(name: string) {
         this._name = name;
     }
 
-    set tokens(tokens: number){
+    set tokens(tokens: number) {
         this._tokens = tokens;
     }
 }

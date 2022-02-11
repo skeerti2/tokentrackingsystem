@@ -9,18 +9,17 @@
                 <th scope="col">Transaction Date</th>
                 <th scope="col">Game</th>
                 <th scope="col">Transaction Type</th>
-
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let transactionItem of getTransactionHistory()">
-                <!-- <th>{{ transactionItem.id }}</th> -->
                 <td>{{ transactionItem.description }}</td>
                 <td>{{ transactionItem.noOfTokens }}</td>
                 <td>{{ transactionItem.noOfTokens * getTokenAmount()}}</td>
                 <td>{{ transactionItem.transactionDate | date: "short" }}</td>
                 <td>{{ transactionItem.game.name === undefined ? 'N/A': transactionItem.game?.name }}</td>
-                <td>{{ transactionItem.transactionType == transactionTypeEnum.BUY ? 'BOUGHT TOKENS': 'SPENT TOKENS'}}</td>
+                <td>{{ transactionItem.transactionType == transactionTypeEnum.BUY ? 'BOUGHT TOKENS': 'SPENT TOKENS'}}
+                </td>
 
             </tr>
         </tbody>
