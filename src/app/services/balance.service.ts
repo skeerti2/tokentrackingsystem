@@ -16,7 +16,7 @@ export class BalanceService {
    }
 
    isInValidTransaction(tokenCount: number){
-    if(this.balance - tokenCount*TOKEN_VALUE < 0){
+    if(this.balance - tokenCount < 0){
       return true
     }
     return false
@@ -36,9 +36,9 @@ export class BalanceService {
        this.balance = 0;
      }
       if(transactionItem.getTransactionType() == this.transactionType.BUY){
-          this.balance = this.balance + transactionItem.getNoOfTokens()*TOKEN_VALUE;
+          this.balance = this.balance + transactionItem.getNoOfTokens();
         }else{
-          this.balance = this.balance - transactionItem.getNoOfTokens()*TOKEN_VALUE;
+          this.balance = this.balance - transactionItem.getNoOfTokens();
         }
      }
 
