@@ -11,11 +11,14 @@ To run locally, clone the git repository and run 'npm install' in the project di
 
 * Pagination for Transaction History Table to accomodate large data, sort/filters as per latest transaction, token count.
 * State Management for persisting data using Redux
-* User log in/Authentication to accomodate multiple users and related transaction details.
+* User log in/Authentication to accomodate multiple users and related token, transaction and game details.
 
 ## Development server
 
 * Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 * The app is also hosted on Heroku `https://arcadetokentracking.herokuapp.com/`
 
-
+## Improvements 
+* Show Validation Error if Token Balance is less than user's chosen game tokens(before or after submit is clicked)
+* Testing
+* Pagination for transaction history table
