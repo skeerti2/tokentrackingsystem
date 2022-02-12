@@ -16,9 +16,9 @@ To run locally, clone the git repository and run 'npm install' in the project di
 ## Development server
 
 * Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-* The app is also hosted on Heroku `https://arcadetokentracking.herokuapp.com/`
+* The app is also hosted on [Heroku](https://arcadetokentracking.herokuapp.com/)
 
 ## Improvements 
-* Show Validation Error if Token Balance is less than user's chosen game tokens(before or after submit is clicked)
+* Show Validation Error if Token Balance is less than user's chosen game tokens (before or after submit is clicked) - Currently the validation is implemented where if a user tries to play a game that requires more tokens than what is available in the balance, the submit will not allow the transaction. However, for better user experience, I will be implementing an error message notification on form submit that clearly tells the user that they don't have sufficient tokens to play the game.
 * Testing
 * Pagination for transaction history table
